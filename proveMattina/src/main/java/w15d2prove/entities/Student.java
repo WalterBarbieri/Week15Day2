@@ -1,15 +1,20 @@
 package w15d2prove.entities;
 
+import java.util.UUID;
+
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 
+//@Table(name = "students", uniqueConstraints = { @UniqueConstraint(columnNames = { "firstName", "lastName" }) })
 @Table(name = "students")
 public class Student {
-	@Id
-	private long Id;
+	@Id // imposta chiave primaria
+	@GeneratedValue // per gestire automaticamente e random il valore tramite db
+	private UUID Id;
 	private String firstName;
 	private String lastName;
 
@@ -23,7 +28,7 @@ public class Student {
 		this.setLastName(lastName);
 	}
 
-	public long getId() {
+	public UUID getId() {
 		return Id;
 	}
 
@@ -41,6 +46,11 @@ public class Student {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+
+	@Override
+	public String toString() {
+		return "Student [Id=" + Id + ", firstName=" + firstName + ", lastName=" + lastName + "]";
 	}
 
 }
