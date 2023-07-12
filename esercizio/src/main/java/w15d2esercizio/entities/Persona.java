@@ -5,6 +5,8 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -23,6 +25,7 @@ public class Persona {
 	private String cognome;
 	private String email;
 	private LocalDate dataNascita;
+	@Enumerated(EnumType.STRING)
 	private Sesso sesso;
 	@OneToMany(mappedBy = "persona", cascade = CascadeType.ALL)
 	private Set<Partecipazione> partecipazioni;

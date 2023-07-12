@@ -1,6 +1,8 @@
 package w15d2esercizio.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -20,6 +22,7 @@ public class Partecipazione {
 	@ManyToOne
 	@JoinColumn
 	private Evento evento;
+	@Enumerated(EnumType.STRING)
 	private Stato stato;
 
 	public Partecipazione() {
