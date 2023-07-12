@@ -5,7 +5,6 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -20,7 +19,6 @@ public class Partecipazione {
 	@ManyToOne
 	private Persona persona;
 	@ManyToOne
-	@JoinColumn
 	private Evento evento;
 	@Enumerated(EnumType.STRING)
 	private Stato stato;

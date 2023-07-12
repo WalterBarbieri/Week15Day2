@@ -36,8 +36,8 @@ public class App {
 
 //		ld.save(loc1);
 //		ld.save(loc2);
-		Location location1 = ld.searchById(1);
-		Location location2 = ld.searchById(2);
+		Location location1 = ld.searchById(18);
+		Location location2 = ld.searchById(19);
 
 		Evento ev1 = new Evento("Gita in Città", LocalDate.now(), "Visitiamo luoghi culturali", TipoEvento.PUBBLICO, 30,
 				location1);
@@ -45,8 +45,8 @@ public class App {
 //		ed.save(ev1);
 //		ed.save(ev2);
 
-		Evento event1 = ed.searchById(5);
-		Evento event2 = ed.searchById(6);
+		Evento event1 = ed.searchById(28);
+		Evento event2 = ed.searchById(29);
 
 		Persona p1 = new Persona("Mangia", "Lamela", "123@456.ml", LocalDate.of(1990, 9, 10), Sesso.FEMMINA);
 		Persona p2 = new Persona("Bevi", "Labotte", "987@654.bl", LocalDate.of(1980, 3, 21), Sesso.MASCHIO);
@@ -54,8 +54,8 @@ public class App {
 //		pd.save(p1);
 //		pd.save(p2);
 
-		Persona pers1 = pd.searchById(7);
-		Persona pers2 = pd.searchById(8);
+		Persona pers1 = pd.searchById(30);
+		Persona pers2 = pd.searchById(31);
 
 		Partecipazione par1 = new Partecipazione(pers1, event1, Stato.DA_CONFERMARE);
 		Partecipazione par2 = new Partecipazione(pers2, event2, Stato.CONFERMATA);
@@ -63,11 +63,20 @@ public class App {
 //		pad.save(par1);
 //		pad.save(par2);
 
-		Partecipazione partecipazione1 = pad.searchById(12);
-		Partecipazione partecipazione2 = pad.searchById(13);
+		Partecipazione partecipazione1 = pad.searchById(32);
+		Partecipazione partecipazione2 = pad.searchById(33);
+
+//		pers1.getPartecipazioni().add(par2);
+//		pers2.getPartecipazioni().add(par1);
+//
+//		pd.save(pers1);
+//		pd.save(pers2);
 
 		System.out.println(partecipazione1);
 		System.out.println(partecipazione2);
+		System.out.println(pers1.getPartecipazioni());
+		System.out.println(pers2.getPartecipazioni());
+		System.out.println(event1.getPartecipazioni());
 
 		em.close();
 		emf.close();
