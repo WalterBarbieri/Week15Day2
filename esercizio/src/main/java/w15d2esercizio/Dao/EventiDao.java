@@ -1,9 +1,11 @@
-package w15d2esercizio.entities;
+package w15d2esercizio.Dao;
 
 import java.util.UUID;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+
+import w15d2esercizio.entities.Evento;
 
 public class EventiDao {
 	private final EntityManager em;

@@ -1,4 +1,4 @@
-package w15d2esercizio.entities;
+package Enums;
 
 public enum TipoEvento {
 	PUBBLICO, PRIVATO;

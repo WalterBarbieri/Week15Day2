@@ -10,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import Enums.TipoEvento;
+
 @Entity
 @Table(name = "events")
 public class Evento {

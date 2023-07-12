@@ -6,9 +6,9 @@ import java.util.UUID;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
-import w15d2esercizio.entities.EventiDao;
+import Enums.TipoEvento;
+import w15d2esercizio.Dao.EventiDao;
 import w15d2esercizio.entities.Evento;
-import w15d2esercizio.entities.TipoEvento;
 import w15d2esercizio.utils.JpaUtil;
 
 public class App {
