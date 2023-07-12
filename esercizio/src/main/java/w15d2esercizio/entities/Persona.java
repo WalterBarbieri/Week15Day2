@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import Enums.Sesso;
+import w15d2esercizio.Enums.Sesso;
 
 @Entity
 @Table(name = "persone")

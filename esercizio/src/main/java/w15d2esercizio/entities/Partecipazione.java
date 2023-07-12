@@ -7,7 +7,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import Enums.Stato;
+import w15d2esercizio.Enums.Stato;
 
 @Entity
 @Table(name = "partecipazioni")

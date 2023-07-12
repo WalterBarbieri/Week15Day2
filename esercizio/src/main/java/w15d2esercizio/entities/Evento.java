@@ -13,7 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import Enums.TipoEvento;
+import w15d2esercizio.Enums.TipoEvento;
 
 @Entity
 @Table(name = "events")

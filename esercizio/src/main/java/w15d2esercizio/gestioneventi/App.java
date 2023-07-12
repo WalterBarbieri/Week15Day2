@@ -5,13 +5,13 @@ import java.time.LocalDate;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
-import Enums.Sesso;
-import Enums.Stato;
-import Enums.TipoEvento;
 import w15d2esercizio.Dao.EventiDao;
 import w15d2esercizio.Dao.LocationDao;
 import w15d2esercizio.Dao.PartecipazioneDao;
 import w15d2esercizio.Dao.PersonaDao;
+import w15d2esercizio.Enums.Sesso;
+import w15d2esercizio.Enums.Stato;
+import w15d2esercizio.Enums.TipoEvento;
 import w15d2esercizio.entities.Evento;
 import w15d2esercizio.entities.Location;
 import w15d2esercizio.entities.Partecipazione;
