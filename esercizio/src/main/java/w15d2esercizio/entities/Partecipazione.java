@@ -3,6 +3,8 @@ package w15d2esercizio.entities;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import Enums.Stato;
@@ -13,7 +15,10 @@ public class Partecipazione {
 	@Id
 	@GeneratedValue
 	private long id;
+	@ManyToOne
 	private Persona persona;
+	@ManyToOne
+	@JoinColumn
 	private Evento evento;
 	private Stato stato;
 

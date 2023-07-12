@@ -1,8 +1,12 @@
 package w15d2esercizio.entities;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -10,9 +14,12 @@ import javax.persistence.Table;
 public class Location {
 	@Id
 	@GeneratedValue
+
 	private long id;
 	private String nome;
 	private String citta;
+	@OneToMany(mappedBy = "location", cascade = CascadeType.ALL)
+	private Set<Evento> eventi;
 
 	public Location() {
 

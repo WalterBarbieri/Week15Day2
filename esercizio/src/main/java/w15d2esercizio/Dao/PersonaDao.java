@@ -1,7 +1,5 @@
 package w15d2esercizio.Dao;
 
-import java.util.UUID;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
@@ -25,7 +23,7 @@ public class PersonaDao {
 		System.out.println("Persona salvato con successo!");
 	}
 
-	public Persona searchById(UUID id) {
+	public Persona searchById(long id) {
 		Persona found = em.find(Persona.class, id);
 
 		if (found != null) {
@@ -37,7 +35,7 @@ public class PersonaDao {
 		return null;
 	}
 
-	public void searchAndDestroy(UUID id) {
+	public void searchAndDestroy(long id) {
 		Persona found = em.find(Persona.class, id);
 
 		if (found != null) {
@@ -55,7 +53,7 @@ public class PersonaDao {
 		}
 	}
 
-//	public void refresh(UUID id) {
+//	public void refresh(long id) {
 //		Persona found = em.find(Persona.class, id);
 //
 //		found.setDescrizione("Questa Descrizione non è adatta ai minori");

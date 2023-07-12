@@ -1,7 +1,5 @@
 package w15d2esercizio.Dao;
 
-import java.util.UUID;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
@@ -25,7 +23,7 @@ public class EventiDao {
 		System.out.println("Evento salvato con successo!");
 	}
 
-	public Evento searchById(UUID id) {
+	public Evento searchById(long id) {
 		Evento found = em.find(Evento.class, id);
 
 		if (found != null) {
@@ -37,7 +35,7 @@ public class EventiDao {
 		return null;
 	}
 
-	public void searchAndDestroy(UUID id) {
+	public void searchAndDestroy(long id) {
 		Evento found = em.find(Evento.class, id);
 
 		if (found != null) {
@@ -55,7 +53,7 @@ public class EventiDao {
 		}
 	}
 
-	public void refresh(UUID id) {
+	public void refresh(long id) {
 		Evento found = em.find(Evento.class, id);
 
 		found.setDescrizione("Questa Descrizione non è adatta ai minori");

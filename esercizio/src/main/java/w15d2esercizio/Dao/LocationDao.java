@@ -1,7 +1,5 @@
 package w15d2esercizio.Dao;
 
-import java.util.UUID;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
@@ -25,7 +23,7 @@ public class LocationDao {
 		System.out.println("Location salvato con successo!");
 	}
 
-	public Location searchById(UUID id) {
+	public Location searchById(long id) {
 		Location found = em.find(Location.class, id);
 
 		if (found != null) {
@@ -37,7 +35,7 @@ public class LocationDao {
 		return null;
 	}
 
-	public void searchAndDestroy(UUID id) {
+	public void searchAndDestroy(long id) {
 		Location found = em.find(Location.class, id);
 
 		if (found != null) {
@@ -55,7 +53,7 @@ public class LocationDao {
 		}
 	}
 
-//	public void refresh(UUID id) {
+//	public void refresh(long id) {
 //		Location found = em.find(Location.class, id);
 //
 //		found.setDescrizione("Questa Descrizione non è adatta ai minori");

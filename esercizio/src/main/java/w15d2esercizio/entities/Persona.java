@@ -1,10 +1,13 @@
 package w15d2esercizio.entities;
 
 import java.time.LocalDate;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import Enums.Sesso;
@@ -21,6 +24,8 @@ public class Persona {
 	private String email;
 	private LocalDate dataNascita;
 	private Sesso sesso;
+	@OneToMany(mappedBy = "persona", cascade = CascadeType.ALL)
+	private Set<Partecipazione> partecipazioni;
 
 	public Persona() {
 
@@ -80,6 +85,14 @@ public class Persona {
 
 	public void setSesso(Sesso sesso) {
 		this.sesso = sesso;
+	}
+
+	public Set<Partecipazione> getPartecipazioni() {
+		return partecipazioni;
+	}
+
+	public void setPartecipazioni(Set<Partecipazione> partecipazioni) {
+		this.partecipazioni = partecipazioni;
 	}
 
 	@Override
