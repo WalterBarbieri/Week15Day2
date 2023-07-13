@@ -59,7 +59,9 @@ public class App {
 				TipoEvento.PRIVATO, 1, location5, TipoConcerto.CLASSICO, false);
 
 //		ed.save(zeppelin);
-		ed.save(chopin);
+//		ed.save(chopin);
+
+		ed.getConcertiStreaming(true).forEach(el -> System.out.println(el));
 
 //		Evento event1 = ed.searchById(28);
 //		Evento event2 = ed.searchById(29);
@@ -70,8 +72,8 @@ public class App {
 //		pd.save(p1);
 //		pd.save(p2);
 
-		Persona pers1 = pd.searchById(30);
-		Persona pers2 = pd.searchById(31);
+//		Persona pers1 = pd.searchById(30);
+//		Persona pers2 = pd.searchById(31);
 
 //		Partecipazione par1 = new Partecipazione(pers1, event1, Stato.DA_CONFERMARE);
 //		Partecipazione par2 = new Partecipazione(pers2, event2, Stato.CONFERMATA);

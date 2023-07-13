@@ -1,8 +1,12 @@
 package w15d2esercizio.Dao;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.TypedQuery;
 
+import w15d2esercizio.entities.Concerto;
 import w15d2esercizio.entities.Evento;
 
 public class EventiDao {
@@ -67,6 +71,13 @@ public class EventiDao {
 
 		System.out.println(found);
 
+	}
+
+	public List<Concerto> getConcertiStreaming(Boolean myBoo) {
+		TypedQuery<Concerto> getAllQuery = em.createQuery("SELECT a FROM Concerto a where inStreaming = :boolean",
+				Concerto.class);
+		getAllQuery.setParameter("boolean", myBoo);
+		return getAllQuery.getResultList();
 	}
 
 }
