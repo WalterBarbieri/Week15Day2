@@ -17,6 +17,7 @@ import w15d2esercizio.Enums.TipoConcerto;
 import w15d2esercizio.Enums.TipoEvento;
 import w15d2esercizio.entities.Concerto;
 import w15d2esercizio.entities.Location;
+import w15d2esercizio.entities.PartiteDiCalcio;
 import w15d2esercizio.entities.Persona;
 import w15d2esercizio.utils.JpaUtil;
 
@@ -57,7 +58,7 @@ public class App {
 //		Evento ev2 = new Evento("Gita al Mare", LocalDate.now(), "Andiamo al mare", TipoEvento.PRIVATO, 6, location2);
 //		ed.save(ev1);
 //		ed.save(ev2);
-
+		log.info("******************ESERCIZIO 1**********************");
 		Concerto zeppelin = new Concerto("Concerto Led Zeppelin", LocalDate.of(1970, 6, 2),
 				"Super concerto non mancare", TipoEvento.PUBBLICO, 10000, location2, TipoConcerto.ROCK, true);
 		Concerto chopin = new Concerto("Chopin Etude op. 25", LocalDate.of(1837, 12, 25), "Concerto di natale per DIO",
@@ -96,7 +97,28 @@ public class App {
 //		pd.save(p2);
 //		pd.save(p3);
 //		pd.save(p4);
+		log.info("******************ESERCIZIO 2**********************");
 
+		PartiteDiCalcio uno = new PartiteDiCalcio("Prima partita", LocalDate.now(), "una partita", TipoEvento.PUBBLICO,
+				2000, location2, "Casa1", "Ospite1", 3, 1);
+		PartiteDiCalcio due = new PartiteDiCalcio("Seconda partita", LocalDate.now(), "una partita",
+				TipoEvento.PUBBLICO, 2000, location3, "Casa2", "Ospite2", 2, 3);
+		PartiteDiCalcio tre = new PartiteDiCalcio("Terza partita", LocalDate.now(), "una partita", TipoEvento.PUBBLICO,
+				1000, location2, "Casa4", "Ospite4", 1, 0);
+		PartiteDiCalcio quattro = new PartiteDiCalcio("Quarta partita", LocalDate.now(), "una partita",
+				TipoEvento.PUBBLICO, 1000, location4, "Casa3", "Ospite3", 2, 2);
+
+		log.info("Partite Vinte in Casa:");
+		ed.getPartiteVinteInCasa().forEach(el -> log.info(el.toString()));
+
+		log.info("Partite Vinte in Trasferta:");
+		ed.getPartiteVinteInTrasferta().forEach(el -> log.info(el.toString()));
+
+		log.info("Partite Pareggiate:");
+		ed.getPareggi().forEach(el -> log.info(el.toString()));
+
+//		ed.save(tre);
+//		ed.save(quattro);
 //		Persona pers1 = pd.searchById(30);
 //		Persona pers2 = pd.searchById(31);
 

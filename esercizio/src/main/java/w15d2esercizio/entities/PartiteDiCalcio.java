@@ -4,14 +4,19 @@ import java.time.LocalDate;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.NamedQuery;
 
 import w15d2esercizio.Enums.TipoEvento;
 
 @Entity
 @DiscriminatorValue("Partite di Calcio")
+@NamedQuery(name = "vinteCasa", query = "SELECT a FROM PartiteDiCalcio a WHERE a.squadraVincente = a.squadraCasa")
+@NamedQuery(name = "vinteTrasferta", query = "SELECT a FROM PartiteDiCalcio a WHERE a.squadraVincente = a.squadraOspiti")
+@NamedQuery(name = "pareggiate", query = "SELECT a FROM PartiteDiCalcio a WHERE a.squadraVincente = null")
 public class PartiteDiCalcio extends Evento {
 	private String squadraCasa;
 	private String squadraOspiti;
+	private String squadraVincente;
 	private int golCasa;
 	private int golOspiti;
 
@@ -27,6 +32,7 @@ public class PartiteDiCalcio extends Evento {
 		this.squadraOspiti = squadraOspiti;
 		this.golCasa = golCasa;
 		this.golOspiti = golOspiti;
+		this.setSquadraVincente();
 	}
 
 	public String getSquadraCasa() {
@@ -59,6 +65,21 @@ public class PartiteDiCalcio extends Evento {
 
 	public void setGolOspiti(int golOspiti) {
 		this.golOspiti = golOspiti;
+	}
+
+	public String getSquadraVincente() {
+		return squadraVincente;
+	}
+
+	public void setSquadraVincente() {
+		if (golCasa > golOspiti) {
+			this.squadraVincente = this.squadraCasa;
+		} else if (golOspiti > golCasa) {
+			this.squadraVincente = this.squadraOspiti;
+		} else {
+			this.squadraVincente = null;
+		}
+
 	}
 
 	@Override

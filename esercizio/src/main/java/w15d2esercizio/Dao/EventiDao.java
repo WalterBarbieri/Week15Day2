@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import w15d2esercizio.Enums.TipoConcerto;
 import w15d2esercizio.entities.Concerto;
 import w15d2esercizio.entities.Evento;
+import w15d2esercizio.entities.PartiteDiCalcio;
 import w15d2esercizio.gestioneventi.App;
 
 public class EventiDao {
@@ -90,6 +91,21 @@ public class EventiDao {
 		TypedQuery<Concerto> getAllQuery = em.createQuery("SELECT a FROM Concerto a WHERE genere = :genere",
 				Concerto.class);
 		getAllQuery.setParameter("genere", genere);
+		return getAllQuery.getResultList();
+	}
+
+	public List<PartiteDiCalcio> getPartiteVinteInCasa() {
+		TypedQuery<PartiteDiCalcio> getAllQuery = em.createNamedQuery("vinteCasa", PartiteDiCalcio.class);
+		return getAllQuery.getResultList();
+	}
+
+	public List<PartiteDiCalcio> getPartiteVinteInTrasferta() {
+		TypedQuery<PartiteDiCalcio> getAllQuery = em.createNamedQuery("vinteTrasferta", PartiteDiCalcio.class);
+		return getAllQuery.getResultList();
+	}
+
+	public List<PartiteDiCalcio> getPareggi() {
+		TypedQuery<PartiteDiCalcio> getAllQuery = em.createNamedQuery("pareggiate", PartiteDiCalcio.class);
 		return getAllQuery.getResultList();
 	}
 
