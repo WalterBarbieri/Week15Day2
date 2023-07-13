@@ -6,10 +6,16 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import w15d2esercizio.Enums.TipoConcerto;
 import w15d2esercizio.entities.Concerto;
 import w15d2esercizio.entities.Evento;
+import w15d2esercizio.gestioneventi.App;
 
 public class EventiDao {
+	private static Logger log = LoggerFactory.getLogger(App.class);
 	private final EntityManager em;
 
 	public EventiDao(EntityManager em) {
@@ -24,7 +30,7 @@ public class EventiDao {
 
 		t.commit();
 
-		System.out.println("Evento salvato con successo!");
+		log.info("Evento salvato con successo!");
 	}
 
 	public Evento searchById(long id) {
@@ -33,7 +39,7 @@ public class EventiDao {
 		if (found != null) {
 			return found;
 		} else {
-			System.out.println("Evento non trovato");
+			log.info("Evento non trovato");
 		}
 
 		return null;
@@ -51,9 +57,9 @@ public class EventiDao {
 
 			t.commit();
 
-			System.out.println("Evento eliminato correttamente");
+			log.info("Evento eliminato correttamente");
 		} else {
-			System.out.println("Evento non trovato");
+			log.info("Evento non trovato");
 		}
 	}
 
@@ -63,13 +69,13 @@ public class EventiDao {
 		found.setDescrizione("Questa Descrizione non è adatta ai minori");
 		found.setTitolo("Vietato");
 
-		System.out.println("PRE REFRESH");
-		System.out.println(found);
+		log.info("PRE REFRESH");
+		log.info(found.toString());
 		em.refresh(found);
 
-		System.out.println("POST REFRESH");
+		log.info("POST REFRESH");
 
-		System.out.println(found);
+		log.info(found.toString());
 
 	}
 
@@ -77,6 +83,13 @@ public class EventiDao {
 		TypedQuery<Concerto> getAllQuery = em.createQuery("SELECT a FROM Concerto a where inStreaming = :boolean",
 				Concerto.class);
 		getAllQuery.setParameter("boolean", myBoo);
+		return getAllQuery.getResultList();
+	}
+
+	public List<Concerto> getConcertiPerGenere(TipoConcerto genere) {
+		TypedQuery<Concerto> getAllQuery = em.createQuery("SELECT a FROM Concerto a WHERE genere = :genere",
+				Concerto.class);
+		getAllQuery.setParameter("genere", genere);
 		return getAllQuery.getResultList();
 	}
 

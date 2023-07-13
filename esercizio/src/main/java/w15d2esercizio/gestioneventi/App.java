@@ -5,6 +5,9 @@ import java.time.LocalDate;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import w15d2esercizio.Dao.EventiDao;
 import w15d2esercizio.Dao.LocationDao;
 import w15d2esercizio.Dao.PartecipazioneDao;
@@ -20,6 +23,8 @@ import w15d2esercizio.utils.JpaUtil;
 public class App {
 
 	private static EntityManagerFactory emf = JpaUtil.getEntityManagerFactory();
+
+	private static Logger log = LoggerFactory.getLogger(App.class);
 
 	public static void main(String[] args) {
 		EntityManager em = emf.createEntityManager();
@@ -57,20 +62,40 @@ public class App {
 				"Super concerto non mancare", TipoEvento.PUBBLICO, 10000, location2, TipoConcerto.ROCK, true);
 		Concerto chopin = new Concerto("Chopin Etude op. 25", LocalDate.of(1837, 12, 25), "Concerto di natale per DIO",
 				TipoEvento.PRIVATO, 1, location5, TipoConcerto.CLASSICO, false);
+		Concerto vivaldi = new Concerto("Vivaldi Le 4 Stagioni - Estate", LocalDate.of(1715, 8, 15),
+				"Concerto di Ferragosto per la Madonna", TipoEvento.PRIVATO, 1, location1, TipoConcerto.CLASSICO,
+				false);
+		Concerto muddy = new Concerto("Concerto Muddy Waters", LocalDate.of(1961, 3, 11), "Super concerto non mancare",
+				TipoEvento.PUBBLICO, 10000, location4, TipoConcerto.ROCK, true);
 
 //		ed.save(zeppelin);
 //		ed.save(chopin);
+//		ed.save(vivaldi);
+//		ed.save(muddy);
 
-		ed.getConcertiStreaming(true).forEach(el -> System.out.println(el));
+		log.info("Concerti in Streaming: ");
+		ed.getConcertiStreaming(true).forEach(el -> log.info(el.toString()));
+		log.info("Concerti non in Streaming: ");
+		ed.getConcertiStreaming(false).forEach(el -> log.info(el.toString()));
+
+		log.info("Concerti Rock: ");
+		ed.getConcertiPerGenere(TipoConcerto.ROCK).forEach(el -> log.info(el.toString()));
+		;
+		log.info("Concerti Classica: ");
+		ed.getConcertiPerGenere(TipoConcerto.CLASSICO).forEach(el -> log.info(el.toString()));
 
 //		Evento event1 = ed.searchById(28);
 //		Evento event2 = ed.searchById(29);
 
 		Persona p1 = new Persona("Mangia", "Lamela", "123@456.ml", LocalDate.of(1990, 9, 10), Sesso.FEMMINA);
 		Persona p2 = new Persona("Bevi", "Labotte", "987@654.bl", LocalDate.of(1980, 3, 21), Sesso.MASCHIO);
+		Persona p3 = new Persona("Fischia", "Lafoglia", "???@!!!.fl", LocalDate.of(2000, 6, 2), Sesso.MASCHIO);
+		Persona p4 = new Persona("Lancia", "Labomba", "357@951.ll", LocalDate.of(1969, 12, 30), Sesso.FEMMINA);
 
 //		pd.save(p1);
 //		pd.save(p2);
+//		pd.save(p3);
+//		pd.save(p4);
 
 //		Persona pers1 = pd.searchById(30);
 //		Persona pers2 = pd.searchById(31);
