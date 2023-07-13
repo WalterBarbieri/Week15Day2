@@ -74,9 +74,9 @@ public class App {
 
 		System.out.println(partecipazione1);
 		System.out.println(partecipazione2);
-		System.out.println(pers1.getPartecipazioni());
-		System.out.println(pers2.getPartecipazioni());
-		System.out.println(event1.getPartecipazioni());
+		pers1.getPartecipazioni().forEach(el -> System.out.println(el));
+		pers2.getPartecipazioni().forEach(el -> System.out.println(el));
+		event1.getPartecipazioni().forEach(el -> System.out.println(el));
 
 		em.close();
 		emf.close();
