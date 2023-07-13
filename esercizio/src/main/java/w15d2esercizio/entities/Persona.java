@@ -9,6 +9,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -29,6 +30,9 @@ public class Persona {
 	private Sesso sesso;
 	@OneToMany(mappedBy = "persona", cascade = CascadeType.ALL)
 	private Set<Partecipazione> partecipazioni;
+
+	@ManyToMany
+	private Set<GaraDiAtletica> garePartecipate;
 
 	public Persona() {
 
@@ -96,6 +100,14 @@ public class Persona {
 
 	public void setPartecipazioni(Set<Partecipazione> partecipazioni) {
 		this.partecipazioni = partecipazioni;
+	}
+
+	public Set<GaraDiAtletica> getGarePartecipate() {
+		return garePartecipate;
+	}
+
+	public void setGarePartecipate(Set<GaraDiAtletica> garePartecipate) {
+		this.garePartecipate = garePartecipate;
 	}
 
 	@Override
