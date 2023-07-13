@@ -1,6 +1,8 @@
 package w15d2esercizio.gestioneventi;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -16,6 +18,7 @@ import w15d2esercizio.Enums.Sesso;
 import w15d2esercizio.Enums.TipoConcerto;
 import w15d2esercizio.Enums.TipoEvento;
 import w15d2esercizio.entities.Concerto;
+import w15d2esercizio.entities.GaraDiAtletica;
 import w15d2esercizio.entities.Location;
 import w15d2esercizio.entities.PartiteDiCalcio;
 import w15d2esercizio.entities.Persona;
@@ -93,12 +96,17 @@ public class App {
 		Persona p3 = new Persona("Fischia", "Lafoglia", "???@!!!.fl", LocalDate.of(2000, 6, 2), Sesso.MASCHIO);
 		Persona p4 = new Persona("Lancia", "Labomba", "357@951.ll", LocalDate.of(1969, 12, 30), Sesso.FEMMINA);
 
+		Persona persona1 = pd.searchById(12);
+		Persona persona2 = pd.searchById(13);
+		Persona persona3 = pd.searchById(14);
+		Persona persona4 = pd.searchById(15);
+
 //		pd.save(p1);
 //		pd.save(p2);
 //		pd.save(p3);
 //		pd.save(p4);
 		log.info("******************ESERCIZIO 2**********************");
-
+		log.info("******************PARTITE DI CALCIO**********************");
 		PartiteDiCalcio uno = new PartiteDiCalcio("Prima partita", LocalDate.now(), "una partita", TipoEvento.PUBBLICO,
 				2000, location2, "Casa1", "Ospite1", 3, 1);
 		PartiteDiCalcio due = new PartiteDiCalcio("Seconda partita", LocalDate.now(), "una partita",
@@ -107,6 +115,10 @@ public class App {
 				1000, location2, "Casa4", "Ospite4", 1, 0);
 		PartiteDiCalcio quattro = new PartiteDiCalcio("Quarta partita", LocalDate.now(), "una partita",
 				TipoEvento.PUBBLICO, 1000, location4, "Casa3", "Ospite3", 2, 2);
+//		ed.save(uno);
+//		ed.save(due);
+//		ed.save(tre);
+//		ed.save(quattro);
 
 		log.info("Partite Vinte in Casa:");
 		ed.getPartiteVinteInCasa().forEach(el -> log.info(el.toString()));
@@ -117,10 +129,31 @@ public class App {
 		log.info("Partite Pareggiate:");
 		ed.getPareggi().forEach(el -> log.info(el.toString()));
 
-//		ed.save(tre);
-//		ed.save(quattro);
-//		Persona pers1 = pd.searchById(30);
-//		Persona pers2 = pd.searchById(31);
+		log.info("******************GARE DI ATLETICA**********************");
+
+		Set<Persona> setAtleti = new HashSet<>();
+		setAtleti.add(persona1);
+		setAtleti.add(persona2);
+		setAtleti.add(persona3);
+		setAtleti.add(persona4);
+
+		GaraDiAtletica gara1 = new GaraDiAtletica("Maratona", LocalDate.now(), "5km", TipoEvento.PUBBLICO, 200,
+				location1, setAtleti, persona2);
+		GaraDiAtletica gara2 = new GaraDiAtletica("Lancio del Peso", LocalDate.now(), "Pesi Massimi",
+				TipoEvento.PRIVATO, 15, location2, setAtleti, persona4);
+		GaraDiAtletica gara3 = new GaraDiAtletica("Salto in Alto", LocalDate.now(), "2.8m", TipoEvento.PRIVATO, 20,
+				location3, setAtleti, persona3);
+
+		log.info("Ricerca Gara By Vincitore");
+		ed.getGaraDiAtleticaPerVincitore(persona2).forEach(el -> log.info(el.toString()));
+		ed.getGaraDiAtleticaPerVincitore(persona4).forEach(el -> log.info(el.toString()));
+
+		log.info("Ricerca Gara By Partecipante");
+		ed.getGaraDiAtleticaPerPartecipante(persona1).forEach(el -> log.info(el.toString()));
+
+//		ed.save(gara1);
+//		ed.save(gara2);
+//		ed.save(gara3);
 
 //		Partecipazione par1 = new Partecipazione(pers1, event1, Stato.DA_CONFERMARE);
 //		Partecipazione par2 = new Partecipazione(pers2, event2, Stato.CONFERMATA);

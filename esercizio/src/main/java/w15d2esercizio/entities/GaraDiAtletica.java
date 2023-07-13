@@ -9,11 +9,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 
 import w15d2esercizio.Enums.TipoEvento;
 
 @Entity
 @DiscriminatorValue("Gara di Atletica")
+@NamedQuery(name = "atleticaVincitore", query = "SELECT a FROM GaraDiAtletica a WHERE a.vincitore = :vincitore")
+@NamedQuery(name = "atleticaPartecipante", query = "SELECT a FROM GaraDiAtletica a JOIN a.setAtleti b WHERE b = :partecipante")
 public class GaraDiAtletica extends Evento {
 
 	@ManyToMany
