@@ -123,4 +123,17 @@ public class EventiDao {
 		return getAllQuery.getResultList();
 	}
 
+	public List<Evento> getEventi() {
+		TypedQuery<Evento> getAllQuery = em.createNamedQuery("getEventi", Evento.class);
+		return getAllQuery.getResultList();
+	}
+
+	public int getNumeroPartecipanti(long id) {
+		Evento evento = em.find(Evento.class, id);
+		if (evento != null && evento.getPartecipazioni() != null) {
+			return evento.getPartecipazioni().size();
+		}
+		return 0;
+	}
+
 }

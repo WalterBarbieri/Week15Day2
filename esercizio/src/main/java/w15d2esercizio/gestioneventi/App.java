@@ -1,7 +1,9 @@
 package w15d2esercizio.gestioneventi;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.EntityManager;
@@ -18,6 +20,7 @@ import w15d2esercizio.Enums.Sesso;
 import w15d2esercizio.Enums.TipoConcerto;
 import w15d2esercizio.Enums.TipoEvento;
 import w15d2esercizio.entities.Concerto;
+import w15d2esercizio.entities.Evento;
 import w15d2esercizio.entities.GaraDiAtletica;
 import w15d2esercizio.entities.Location;
 import w15d2esercizio.entities.PartiteDiCalcio;
@@ -50,11 +53,27 @@ public class App {
 //		ld.save(loc3);
 //		ld.save(loc4);
 //		ld.save(loc5);
-		Location location1 = ld.searchById(2);
-		Location location2 = ld.searchById(3);
-		Location location3 = ld.searchById(4);
-		Location location4 = ld.searchById(5);
-		Location location5 = ld.searchById(1);
+
+		Location location1 = ld.searchById(1);
+		Location location2 = ld.searchById(2);
+		Location location3 = ld.searchById(3);
+		Location location4 = ld.searchById(4);
+		Location location5 = ld.searchById(5);
+
+		Persona p1 = new Persona("Mangia", "Lamela", "123@456.ml", LocalDate.of(1990, 9, 10), Sesso.FEMMINA);
+		Persona p2 = new Persona("Bevi", "Labotte", "987@654.bl", LocalDate.of(1980, 3, 21), Sesso.MASCHIO);
+		Persona p3 = new Persona("Fischia", "Lafoglia", "???@!!!.fl", LocalDate.of(2000, 6, 2), Sesso.MASCHIO);
+		Persona p4 = new Persona("Lancia", "Labomba", "357@951.ll", LocalDate.of(1969, 12, 30), Sesso.FEMMINA);
+
+//		pd.save(p1);
+//		pd.save(p2);
+//		pd.save(p3);
+//		pd.save(p4);
+
+		Persona persona1 = pd.searchById(6);
+		Persona persona2 = pd.searchById(7);
+		Persona persona3 = pd.searchById(8);
+		Persona persona4 = pd.searchById(9);
 
 //		Evento ev1 = new Evento("Gita in Città", LocalDate.now(), "Visitiamo luoghi culturali", TipoEvento.PUBBLICO, 30,
 //				location1);
@@ -88,23 +107,6 @@ public class App {
 		log.info("Concerti Classica: ");
 		ed.getConcertiPerGenere(TipoConcerto.CLASSICO).forEach(el -> log.info(el.toString()));
 
-//		Evento event1 = ed.searchById(28);
-//		Evento event2 = ed.searchById(29);
-
-		Persona p1 = new Persona("Mangia", "Lamela", "123@456.ml", LocalDate.of(1990, 9, 10), Sesso.FEMMINA);
-		Persona p2 = new Persona("Bevi", "Labotte", "987@654.bl", LocalDate.of(1980, 3, 21), Sesso.MASCHIO);
-		Persona p3 = new Persona("Fischia", "Lafoglia", "???@!!!.fl", LocalDate.of(2000, 6, 2), Sesso.MASCHIO);
-		Persona p4 = new Persona("Lancia", "Labomba", "357@951.ll", LocalDate.of(1969, 12, 30), Sesso.FEMMINA);
-
-		Persona persona1 = pd.searchById(12);
-		Persona persona2 = pd.searchById(13);
-		Persona persona3 = pd.searchById(14);
-		Persona persona4 = pd.searchById(15);
-
-//		pd.save(p1);
-//		pd.save(p2);
-//		pd.save(p3);
-//		pd.save(p4);
 		log.info("******************ESERCIZIO 2**********************");
 		log.info("******************PARTITE DI CALCIO**********************");
 		PartiteDiCalcio uno = new PartiteDiCalcio("Prima partita", LocalDate.now(), "una partita", TipoEvento.PUBBLICO,
@@ -144,6 +146,10 @@ public class App {
 		GaraDiAtletica gara3 = new GaraDiAtletica("Salto in Alto", LocalDate.now(), "2.8m", TipoEvento.PRIVATO, 20,
 				location3, setAtleti, persona3);
 
+		ed.save(gara1);
+		ed.save(gara2);
+		ed.save(gara3);
+
 		log.info("Ricerca Gara By Vincitore");
 		ed.getGaraDiAtleticaPerVincitore(persona2).forEach(el -> log.info(el.toString()));
 		ed.getGaraDiAtleticaPerVincitore(persona4).forEach(el -> log.info(el.toString()));
@@ -151,10 +157,24 @@ public class App {
 		log.info("Ricerca Gara By Partecipante");
 		ed.getGaraDiAtleticaPerPartecipante(persona1).forEach(el -> log.info(el.toString()));
 
-//		ed.save(gara1);
-//		ed.save(gara2);
-//		ed.save(gara3);
+		log.info("******************EVENTI E PARTECIPANTI**********************");
+		log.info("Ricerca Eventi Sold Out");
+		List<Evento> eventi = ed.getEventi();
+		List<Evento> eventiSoldOut = new ArrayList<>();
+		for (Evento evento : eventi) {
+			int numeroPartecipanti = ed.getNumeroPartecipanti(evento.getId());
+			if (numeroPartecipanti >= evento.getNumeroMassimoPartecipanti()) {
+				eventiSoldOut.add(evento);
+			} else {
+				log.info(evento.getId() + ": " + evento.getTitolo() + " non ha partecipanti");
+			}
+		}
 
+		em.close();
+		emf.close();
+
+		// ***********************METODI ESERCIZIO WEEK15 DAY3
+		// ****************************
 //		Partecipazione par1 = new Partecipazione(pers1, event1, Stato.DA_CONFERMARE);
 //		Partecipazione par2 = new Partecipazione(pers2, event2, Stato.CONFERMATA);
 
@@ -175,9 +195,6 @@ public class App {
 //		pers1.getPartecipazioni().forEach(el -> System.out.println(el));
 //		pers2.getPartecipazioni().forEach(el -> System.out.println(el));
 //		event1.getPartecipazioni().forEach(el -> System.out.println(el));
-
-		em.close();
-		emf.close();
 
 		// ******************* METODI ESERCIZIO WEEK15 DAY2 *************************
 		// ed.save(mare);

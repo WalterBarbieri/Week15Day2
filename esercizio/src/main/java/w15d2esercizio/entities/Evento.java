@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -20,6 +21,7 @@ import w15d2esercizio.Enums.TipoEvento;
 @Entity
 @Table(name = "events")
 @Inheritance(strategy = InheritanceType.JOINED)
+@NamedQuery(name = "getEventi", query = "SELECT a FROM Evento a")
 public class Evento {
 
 	@Id
